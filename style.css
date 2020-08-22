@@ -21,7 +21,7 @@ h1 {
 }
 #game {
   display: grid;
-  /* should be set by js */
+  /* gets set by js */
   grid-template-columns: auto 600px auto;
 }
 a {
@@ -31,7 +31,7 @@ a {
 canvas {
   border: 1px solid #52796f;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
-  grid-column: 2;
+  grid-column: 3;
   grid-row: 1;
 }
 ul {
@@ -46,14 +46,14 @@ li {
 }
 #tipsY {
   grid-row: 1;
-  grid-column: 3;
+  grid-column: 4;
   width: 50px;
   padding-left: 10px;
 }
 #tipsX {
   height: 50px;
   grid-row: 2;
-  grid-column: 2;
+  grid-column: 3;
   padding-top: 10px;
 }
 #tipsX > ul {

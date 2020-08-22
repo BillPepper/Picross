@@ -9,7 +9,7 @@ const pass = "#cad2c5";
 // const err = "#523535";
 const err = "#333";
 
-const res = 10;
+const res = 5;
 const tileSize = 40;
 const tileBorderRadius = 2;
 const tileGap = 2;
@@ -26,12 +26,13 @@ let tipsY = [];
 let tipsX = [];
 
 let turnCount = 0;
+let mistakes = 0;
 
 canvas.width = size;
 canvas.height = size;
 document.getElementById(
   "game"
-).style.gridTemplateColumns = `auto ${size}px auto`;
+).style.gridTemplateColumns = `auto 50px ${size}px 50px auto`;
 document.getElementById(
   "tipsYList"
 ).style.gridTemplateRows = `repeat(${res}, ${tileSize}px)`;
@@ -115,7 +116,10 @@ const refresh = () => {
 
 const handleGameEnd = () => {
   console.log("game end");
-  // document.getElementById("overlay").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("overlayText").innerText = mistakes
+    ? `You finished with ${mistakes} mistakes`
+    : "Perfect, no mistakes!";
 };
 
 const handleTileClick = (e) => {
@@ -127,6 +131,7 @@ const handleTileClick = (e) => {
       currentTile.clicked = true;
       if (!currentTile.high) {
         currentTile.correct = false;
+        mistakes++;
       }
       turnCount++;
       refresh();
@@ -147,6 +152,7 @@ const handleAltTileClick = (e) => {
       currentTile.clicked = true;
       if (currentTile.high) {
         currentTile.correct = false;
+        mistakes++;
       }
       turnCount++;
       refresh();
