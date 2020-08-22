@@ -18,6 +18,7 @@ const helpLines = 3; // should be calculated
 
 const disableHelpLines = false;
 const disableTiles = false;
+const disableTips = true;
 
 const tiles = [];
 
@@ -182,22 +183,24 @@ const getTipsY = () => {
 };
 
 const renderTips = () => {
-  for (let i = 0; i < tipsY.length; i++) {
-    const ty = document.getElementById("tipsY").children[0];
+  if (!disableTips) {
+    for (let i = 0; i < tipsY.length; i++) {
+      const ty = document.getElementById("tipsY").children[0];
 
-    const e = document.createElement("li");
-    e.innerText = tipsY[i];
+      const e = document.createElement("li");
+      e.innerText = tipsY[i];
 
-    ty.appendChild(e);
-  }
+      ty.appendChild(e);
+    }
 
-  for (let i = 0; i < tipsX.length; i++) {
-    const tx = document.getElementById("tipsX").children[0];
+    for (let i = 0; i < tipsX.length; i++) {
+      const tx = document.getElementById("tipsX").children[0];
 
-    const e = document.createElement("li");
-    e.innerText = tipsX[i];
+      const e = document.createElement("li");
+      e.innerText = tipsX[i];
 
-    tx.appendChild(e);
+      tx.appendChild(e);
+    }
   }
 };
 
