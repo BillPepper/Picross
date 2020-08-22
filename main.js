@@ -12,6 +12,7 @@ const res = 10;
 const tileSize = 40;
 const tileGap = 2;
 const size = res * tileSize;
+const helpLines = 3; // should be calculated
 
 const tiles = [];
 
@@ -42,6 +43,18 @@ const render = () => {
         tileSize - tileGap * 2,
         tileSize - tileGap * 2
       );
+      for (let i = 0; i <= helpLines; i++) {
+        const lineHeight = tileSize * 5 * i;
+        context.strokeStyle = prim;
+        context.beginPath();
+        context.moveTo(0, lineHeight);
+        context.lineTo(size, tileSize * 5 * i);
+        context.stroke();
+        context.beginPath();
+        context.moveTo(lineHeight, 0);
+        context.lineTo(tileSize * 5 * i, size);
+        context.stroke();
+      }
     }
   }
 };
