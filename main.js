@@ -29,7 +29,9 @@ let turnCount = 0;
 
 canvas.width = size;
 canvas.height = size;
-document.getElementById("game").style.gridTemplateColumns = `${size}px`;
+document.getElementById(
+  "game"
+).style.gridTemplateColumns = `auto ${size}px auto`;
 document.getElementById(
   "tipsYList"
 ).style.gridTemplateRows = `repeat(${res}, ${tileSize}px)`;

@@ -14,9 +14,14 @@ body {
   padding-top: 100px;
   display: none;
 }
+h1 {
+  text-align: center;
+  font-size: 40px;
+}
 #game {
   display: grid;
-  grid-template-columns: 600px;
+  /* should be set by js */
+  grid-template-columns: auto 600px auto;
 }
 a {
   color: #84a98c;
@@ -25,6 +30,8 @@ a {
 canvas {
   border: 1px solid #52796f;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
+  grid-column: 2;
+  grid-row: 1;
 }
 ul {
   list-style: none;
