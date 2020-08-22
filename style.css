@@ -8,15 +8,24 @@ body {
 #overlay {
   width: 100vw;
   height: 100vh;
-  background-color: #11111199;
+  background-color: #111111bb;
   position: absolute;
   text-align: center;
-  padding-top: 100px;
   display: none;
+  top: 0;
+}
+#gameOverWrapper {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
 }
 h1 {
   text-align: center;
   font-size: 40px;
+  text-shadow: 3px 3px 5px #000;
+}
+h3 {
   text-shadow: 3px 3px 5px #000;
 }
 #game {
