@@ -30,11 +30,11 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  /* text-align: center; */
-  padding-top: 20px;
+  display: grid;
 }
 li {
-  padding-bottom: 40px;
+  /* needs to be set to tilesize by js */
+  line-height: 40px;
 }
 #tipsY {
   grid-row: 1;

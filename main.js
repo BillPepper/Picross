@@ -9,7 +9,7 @@ const pass = "#cad2c5";
 const err = "#523535";
 
 const res = 10;
-const tileSize = 60;
+const tileSize = 40;
 const tileGap = 2;
 const size = res * tileSize;
 
@@ -22,9 +22,10 @@ let turnCount = 0;
 
 canvas.width = size;
 canvas.height = size;
-const game = (document.getElementById(
-  "game"
-).style.gridTemplateColumns = `${size}px`);
+document.getElementById("game").style.gridTemplateColumns = `${size}px`;
+document.getElementById(
+  "tipsYList"
+).style.gridTemplateRows = `repeat(${res}, ${tileSize}px)`;
 
 document.addEventListener("contextmenu", (e) => handleAltTileClick(e));
 document.addEventListener("click", (e) => handleTileClick(e));
