@@ -15,7 +15,7 @@ const size = res * tileSize;
 const helpLines = 3; // should be calculated
 
 const disableHelpLines = false;
-const disableTiles = true;
+const disableTiles = false;
 
 const tiles = [];
 
@@ -35,21 +35,6 @@ document.addEventListener("contextmenu", (e) => handleAltTileClick(e));
 document.addEventListener("click", (e) => handleTileClick(e));
 
 const render = () => {
-  if (!disableTiles) {
-    for (let i = 0; i < tiles.length; i++) {
-      for (let j = 0; j < tiles[i].length; j++) {
-        const c = tiles[i][j];
-
-        context.fillStyle = debug ? (c.b ? "#000" : "#555") : tiles[i][j].c;
-        renderTile(
-          c.x * tileSize + tileGap,
-          c.y * tileSize + tileGap,
-          tileSize - tileGap * 2,
-          2
-        );
-      }
-    }
-  }
   if (!disableHelpLines) {
     for (let i = 0; i <= helpLines; i++) {
       const lineHeight = tileSize * 5 * i;
@@ -64,11 +49,27 @@ const render = () => {
       context.stroke();
     }
   }
+  if (!disableTiles) {
+    for (let i = 0; i < tiles.length; i++) {
+      for (let j = 0; j < tiles[i].length; j++) {
+        const c = tiles[i][j];
+        renderTile(
+          c.x * tileSize + tileGap,
+          c.y * tileSize + tileGap,
+          tileSize - tileGap * 2,
+          2,
+          "ok",
+          tiles[i][j].high,
+          tiles[i][j].clicked
+        );
+      }
+    }
+  }
 };
 
-const renderTile = (x, y, size, radius, status) => {
-  context.strokeStyle = err;
-  context.fillStyle = pass;
+const renderTile = (x, y, size, radius, status, b, clicked) => {
+  context.strokeStyle = "#333";
+  context.fillStyle = clicked ? (b === true ? prim : err) : pass;
   context.beginPath();
   context.moveTo(x + radius, y);
   context.lineTo(size + x - radius, y);
@@ -82,6 +83,19 @@ const renderTile = (x, y, size, radius, status) => {
   context.closePath();
   context.fill();
   context.stroke();
+
+  if (status === "dead") {
+    const fourth = size / 4;
+    context.strokeStyle = err;
+    context.lineWidth = 5;
+    context.beginPath();
+    context.moveTo(x + fourth, y + fourth);
+    context.lineTo(x + size - fourth, y + size - fourth);
+    context.moveTo(x + size - fourth, y + fourth);
+    context.lineTo(x + fourth, y + size - fourth);
+    context.closePath();
+    context.stroke();
+  }
 };
 
 const refresh = () => {
@@ -101,10 +115,12 @@ const handleTileClick = (e) => {
   const curTile = getTile(e);
 
   if (!tiles[curTile[1]][curTile[0]].dead) {
-    if (tiles[curTile[1]][curTile[0]].b === true) {
-      tiles[curTile[1]][curTile[0]].c = prim;
+    tiles[curTile[1]][curTile[0]].clicked = true;
+
+    if (tiles[curTile[1]][curTile[0]].high === true) {
+      tiles[curTile[1]][curTile[0]].status = "solved";
     } else {
-      tiles[curTile[1]][curTile[0]].c = err;
+      tiles[curTile[1]][curTile[0]].status = "dead";
     }
     turnCount++;
     tiles[curTile[1]][curTile[0]].dead = true;
@@ -117,7 +133,7 @@ const handleAltTileClick = (e) => {
 
   const curTile = getTile(e);
   if (!tiles[curTile[1]][curTile[0]].dead) {
-    if (tiles[curTile[1]][curTile[0]].b === false) {
+    if (tiles[curTile[1]][curTile[0]].high === false) {
       tiles[curTile[1]][curTile[0]].c = sec;
     } else {
       tiles[curTile[1]][curTile[0]].c = err;
@@ -140,7 +156,7 @@ const getTipsX = () => {
   for (let i = 0; i < tiles.length; i++) {
     let tileValString = "";
     for (let j = 0; j < tiles.length; j++) {
-      tileValString += tiles[j][i].b === true ? 1 : 0;
+      tileValString += tiles[j][i].high === true ? 1 : 0;
     }
 
     let result = [];
@@ -154,7 +170,7 @@ const getTipsY = () => {
   for (let i = 0; i < tiles.length; i++) {
     let tileValString = "";
     for (let j = 0; j < tiles[i].length; j++) {
-      tileValString += tiles[i][j].b === true ? 1 : 0;
+      tileValString += tiles[i][j].high === true ? 1 : 0;
     }
 
     let result = [];
@@ -193,7 +209,13 @@ const generateTiles = () => {
     let c = 0;
     let arr = [];
     for (let j = 0; j < res; j++) {
-      const nu = { x: j, y: i, dead: false, b: randomBool(), c: pass };
+      const nu = {
+        x: j,
+        y: i,
+        dead: false,
+        high: randomBool(),
+        clicked: false,
+      };
       arr.push(nu);
       c++;
 
