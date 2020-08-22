@@ -22,6 +22,9 @@ let turnCount = 0;
 
 canvas.width = size;
 canvas.height = size;
+const game = (document.getElementById(
+  "game"
+).style.gridTemplateColumns = `${size}px`);
 
 document.addEventListener("contextmenu", (e) => handleAltTileClick(e));
 document.addEventListener("click", (e) => handleTileClick(e));
