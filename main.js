@@ -159,7 +159,7 @@ const handleAltTileClick = (e) => {
 const getTileIndecies = (e) => {
   console.log(canvas.offsetLeft, e.clientX);
   const x = Math.floor((e.clientX - canvas.offsetLeft) / tileSize);
-  const y = Math.floor(e.clientY / tileSize);
+  const y = Math.floor((e.clientY - canvas.offsetTop) / tileSize);
 
   return [x, y];
 };
