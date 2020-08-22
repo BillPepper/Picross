@@ -17,8 +17,6 @@ body {
 #game {
   display: grid;
   grid-template-columns: 600px;
-  /* width: 400px; */
-  /* grid-template-columns: auto 40px; */
 }
 a {
   color: #84a98c;
@@ -39,17 +37,13 @@ li {
   padding-bottom: 40px;
 }
 #tipsY {
-  /* border: 1px solid; */
   grid-row: 1;
   grid-column: 2;
   width: 50px;
   padding-left: 10px;
 }
 #tipsX {
-  /* border: 1px solid; */
   height: 50px;
-  /* text-align: center; */
-  /* text-orientation:  */
   margin-top: 30px;
 }
 #tipsX > ul {
