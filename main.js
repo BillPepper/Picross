@@ -14,6 +14,9 @@ const tileGap = 2;
 const size = res * tileSize;
 const helpLines = 3; // should be calculated
 
+const disableHelpLines = false;
+const disableTiles = true;
+
 const tiles = [];
 
 let tipsY = [];
@@ -32,31 +35,53 @@ document.addEventListener("contextmenu", (e) => handleAltTileClick(e));
 document.addEventListener("click", (e) => handleTileClick(e));
 
 const render = () => {
-  for (let i = 0; i < tiles.length; i++) {
-    for (let j = 0; j < tiles[i].length; j++) {
-      const c = tiles[i][j];
+  if (!disableTiles) {
+    for (let i = 0; i < tiles.length; i++) {
+      for (let j = 0; j < tiles[i].length; j++) {
+        const c = tiles[i][j];
 
-      context.fillStyle = debug ? (c.b ? "#000" : "#555") : tiles[i][j].c;
-      context.fillRect(
-        c.x * tileSize + tileGap,
-        c.y * tileSize + tileGap,
-        tileSize - tileGap * 2,
-        tileSize - tileGap * 2
-      );
-      for (let i = 0; i <= helpLines; i++) {
-        const lineHeight = tileSize * 5 * i;
-        context.strokeStyle = prim;
-        context.beginPath();
-        context.moveTo(0, lineHeight);
-        context.lineTo(size, tileSize * 5 * i);
-        context.stroke();
-        context.beginPath();
-        context.moveTo(lineHeight, 0);
-        context.lineTo(tileSize * 5 * i, size);
-        context.stroke();
+        context.fillStyle = debug ? (c.b ? "#000" : "#555") : tiles[i][j].c;
+        renderTile(
+          c.x * tileSize + tileGap,
+          c.y * tileSize + tileGap,
+          tileSize - tileGap * 2,
+          2
+        );
       }
     }
   }
+  if (!disableHelpLines) {
+    for (let i = 0; i <= helpLines; i++) {
+      const lineHeight = tileSize * 5 * i;
+      context.strokeStyle = prim;
+      context.beginPath();
+      context.moveTo(0, lineHeight);
+      context.lineTo(size, tileSize * 5 * i);
+      context.stroke();
+      context.beginPath();
+      context.moveTo(lineHeight, 0);
+      context.lineTo(tileSize * 5 * i, size);
+      context.stroke();
+    }
+  }
+};
+
+const renderTile = (x, y, size, radius, status) => {
+  context.strokeStyle = err;
+  context.fillStyle = pass;
+  context.beginPath();
+  context.moveTo(x + radius, y);
+  context.lineTo(size + x - radius, y);
+  context.lineTo(size + x, y + radius);
+  context.lineTo(size + x, size + y - radius);
+  context.lineTo(size + x - radius, size + y);
+  context.lineTo(x + radius, size + y);
+  context.lineTo(x, size + y - radius);
+  context.lineTo(x, y + radius);
+  context.lineTo(x + radius, y);
+  context.closePath();
+  context.fill();
+  context.stroke();
 };
 
 const refresh = () => {
