@@ -116,12 +116,13 @@ const handleGameEnd = () => {
 };
 
 const handleTileClick = (e) => {
-  const curTile = getTile(e);
+  const tileIndicies = getTileIndecies(e);
+  const currentTile = tiles[tileIndicies[1]][tileIndicies[0]];
 
-  if (!tiles[curTile[1]][curTile[0]].dead) {
-    tiles[curTile[1]][curTile[0]].clicked = true;
-    if (!tiles[curTile[1]][curTile[0]].high) {
-      tiles[curTile[1]][curTile[0]].correct = false;
+  if (!currentTile.dead) {
+    currentTile.clicked = true;
+    if (!currentTile.high) {
+      currentTile.correct = false;
     }
     turnCount++;
     refresh();
@@ -131,18 +132,21 @@ const handleTileClick = (e) => {
 const handleAltTileClick = (e) => {
   e.preventDefault();
 
-  const curTile = getTile(e);
-  if (!tiles[curTile[1]][curTile[0]].dead) {
-    tiles[curTile[1]][curTile[0]].clicked = true;
-    if (tiles[curTile[1]][curTile[0]].high) {
-      tiles[curTile[1]][curTile[0]].correct = false;
+  const tileIndicies = getTileIndecies(e);
+  const currentTile = tiles[tileIndicies[1]][tileIndicies[0]];
+
+  if (!currentTile.dead) {
+    currentTile.clicked = true;
+    if (currentTile.high) {
+      currentTile.correct = false;
     }
     turnCount++;
     refresh();
   }
 };
 
-const getTile = (e) => {
+const getTileIndecies = (e) => {
+  debugger;
   const x = Math.floor(e.clientX / tileSize);
   const y = Math.floor(e.clientY / tileSize);
 
