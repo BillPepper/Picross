@@ -120,13 +120,17 @@ const handleTileClick = (e) => {
   const tileIndicies = getTileIndecies(e);
   const currentTile = tiles[tileIndicies[1]][tileIndicies[0]];
 
-  if (!currentTile.dead) {
-    currentTile.clicked = true;
-    if (!currentTile.high) {
-      currentTile.correct = false;
+  try {
+    if (!currentTile.clicked) {
+      currentTile.clicked = true;
+      if (!currentTile.high) {
+        currentTile.correct = false;
+      }
+      turnCount++;
+      refresh();
     }
-    turnCount++;
-    refresh();
+  } catch (e) {
+    console.log("You did not click the gameboard");
   }
 };
 
@@ -136,13 +140,17 @@ const handleAltTileClick = (e) => {
   const tileIndicies = getTileIndecies(e);
   const currentTile = tiles[tileIndicies[1]][tileIndicies[0]];
 
-  if (!currentTile.dead) {
-    currentTile.clicked = true;
-    if (currentTile.high) {
-      currentTile.correct = false;
+  try {
+    if (!currentTile.clicked) {
+      currentTile.clicked = true;
+      if (currentTile.high) {
+        currentTile.correct = false;
+      }
+      turnCount++;
+      refresh();
     }
-    turnCount++;
-    refresh();
+  } catch (e) {
+    console.log("You did not click the gameboard");
   }
 };
 
