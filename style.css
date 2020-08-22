@@ -1,0 +1,61 @@
+body {
+  background-color: #2f3e46;
+  color: #84a98c;
+  font-family: arial;
+  margin: 0;
+  padding: 0;
+}
+#overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: #11111199;
+  position: absolute;
+  text-align: center;
+  padding-top: 100px;
+  display: none;
+}
+#game {
+  display: grid;
+  grid-template-columns: 600px;
+  /* width: 400px; */
+  /* grid-template-columns: auto 40px; */
+}
+a {
+  color: #84a98c;
+  text-decoration: none;
+}
+canvas {
+  border: 1px solid #52796f;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* text-align: center; */
+  padding-top: 20px;
+}
+li {
+  padding-bottom: 40px;
+}
+#tipsY {
+  /* border: 1px solid; */
+  grid-row: 1;
+  grid-column: 2;
+  width: 50px;
+}
+#tipsX {
+  /* border: 1px solid; */
+  height: 50px;
+  /* text-align: center; */
+  /* text-orientation:  */
+}
+#tipsX > ul {
+  display: flex;
+  padding-top: 0;
+}
+#tipsX > ul > li {
+  width: 80px;
+  transform: rotate(90deg);
+  padding-bottom: 0;
+}
