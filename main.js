@@ -18,7 +18,7 @@ const helpLines = 3; // should be calculated
 
 const disableHelpLines = false;
 const disableTiles = false;
-const disableTips = true;
+const disableTips = false;
 
 const tiles = [];
 
