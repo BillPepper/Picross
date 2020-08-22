@@ -6,10 +6,12 @@ const debug = false;
 const prim = "#84a98c";
 const sec = "#2f3e46";
 const pass = "#cad2c5";
-const err = "#523535";
+// const err = "#523535";
+const err = "#333";
 
 const res = 10;
 const tileSize = 40;
+const tileBorderRadius = 2;
 const tileGap = 2;
 const size = res * tileSize;
 const helpLines = 3; // should be calculated
@@ -52,13 +54,13 @@ const render = () => {
   if (!disableTiles) {
     for (let i = 0; i < tiles.length; i++) {
       for (let j = 0; j < tiles[i].length; j++) {
-        const c = tiles[i][j];
+        const currentTile = tiles[i][j];
         renderTile(
-          c.x * tileSize + tileGap,
-          c.y * tileSize + tileGap,
+          currentTile.x * tileSize + tileGap,
+          currentTile.y * tileSize + tileGap,
           tileSize - tileGap * 2,
-          2,
-          "ok",
+          tileBorderRadius,
+          tiles[i][j].correct,
           tiles[i][j].high,
           tiles[i][j].clicked
         );
@@ -67,7 +69,7 @@ const render = () => {
   }
 };
 
-const renderTile = (x, y, size, radius, status, b, clicked) => {
+const renderTile = (x, y, size, radius, correct, b, clicked) => {
   context.strokeStyle = "#333";
   context.fillStyle = clicked ? (b === true ? prim : err) : pass;
   context.beginPath();
@@ -84,17 +86,19 @@ const renderTile = (x, y, size, radius, status, b, clicked) => {
   context.fill();
   context.stroke();
 
-  if (status === "dead") {
+  if (clicked && !correct) {
+    console.log(correct);
     const fourth = size / 4;
-    context.strokeStyle = err;
-    context.lineWidth = 5;
+    context.strokeStyle = "#555";
     context.beginPath();
+    context.lineWidth = 4;
     context.moveTo(x + fourth, y + fourth);
     context.lineTo(x + size - fourth, y + size - fourth);
     context.moveTo(x + size - fourth, y + fourth);
     context.lineTo(x + fourth, y + size - fourth);
     context.closePath();
     context.stroke();
+    context.lineWidth = 1;
   }
 };
 
@@ -116,14 +120,10 @@ const handleTileClick = (e) => {
 
   if (!tiles[curTile[1]][curTile[0]].dead) {
     tiles[curTile[1]][curTile[0]].clicked = true;
-
-    if (tiles[curTile[1]][curTile[0]].high === true) {
-      tiles[curTile[1]][curTile[0]].status = "solved";
-    } else {
-      tiles[curTile[1]][curTile[0]].status = "dead";
+    if (!tiles[curTile[1]][curTile[0]].high) {
+      tiles[curTile[1]][curTile[0]].correct = false;
     }
     turnCount++;
-    tiles[curTile[1]][curTile[0]].dead = true;
     refresh();
   }
 };
@@ -133,14 +133,11 @@ const handleAltTileClick = (e) => {
 
   const curTile = getTile(e);
   if (!tiles[curTile[1]][curTile[0]].dead) {
-    if (tiles[curTile[1]][curTile[0]].high === false) {
-      tiles[curTile[1]][curTile[0]].c = sec;
-    } else {
-      tiles[curTile[1]][curTile[0]].c = err;
+    tiles[curTile[1]][curTile[0]].clicked = true;
+    if (tiles[curTile[1]][curTile[0]].high) {
+      tiles[curTile[1]][curTile[0]].correct = false;
     }
     turnCount++;
-    tiles[curTile[1]][curTile[0]].dead = true;
-
     refresh();
   }
 };
@@ -212,7 +209,7 @@ const generateTiles = () => {
       const nu = {
         x: j,
         y: i,
-        dead: false,
+        correct: true,
         high: randomBool(),
         clicked: false,
       };
