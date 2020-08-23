@@ -20,7 +20,7 @@ const disableHelpLines = false;
 const disableTiles = false;
 const disableTips = false;
 
-const tiles = [];
+let tiles = [];
 
 let tipsY = [];
 let tipsX = [];
@@ -37,8 +37,12 @@ document.getElementById(
   "tipsYList"
 ).style.gridTemplateRows = `repeat(${res}, ${tileSize}px)`;
 
+document.addEventListener("keydown", (e) => e.key === "q" && handleGameEnd());
 document.addEventListener("contextmenu", (e) => handleAltTileClick(e));
 document.addEventListener("click", (e) => handleTileClick(e));
+document
+  .getElementById("restartButton")
+  .addEventListener("click", () => restartGame());
 
 const render = () => {
   if (!disableHelpLines) {
@@ -71,7 +75,6 @@ const render = () => {
       }
     }
   }
-  handleGameEnd();
 };
 
 const renderTile = (x, y, size, radius, correct, b, clicked) => {
@@ -121,6 +124,26 @@ const handleGameEnd = () => {
   document.getElementById("overlayText").innerText = mistakes
     ? `You finished with ${mistakes} mistakes`
     : "Perfect, no mistakes!";
+};
+
+const restartGame = () => {
+  console.log("reset game");
+  debugger;
+  tiles = [];
+  tipsY = [];
+  tipsX = [];
+  turnCount = 0;
+  mistakes = 0;
+  document.getElementById("overlay").style.display = "none";
+  startGame();
+};
+
+const startGame = () => {
+  generateTiles();
+  render();
+  getTipsX();
+  getTipsY();
+  renderTips();
 };
 
 const handleTileClick = (e) => {
@@ -249,8 +272,4 @@ const generateTiles = () => {
   }
 };
 
-generateTiles();
-render();
-getTipsX();
-getTipsY();
-renderTips();
+startGame();
