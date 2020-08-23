@@ -19,6 +19,7 @@ const helpLines = 3; // should be calculated
 const disableHelpLines = false;
 const disableTiles = false;
 const disableTips = false;
+const disableStats = false;
 
 let stats = {
   attempts: 0,
@@ -39,6 +40,10 @@ game.style.gridTemplateRows = `auto 50px ${size}px 50px auto`;
 document.getElementById(
   "tipsYList"
 ).style.gridTemplateRows = `repeat(${res}, ${tileSize}px)`;
+
+if (disableStats) {
+  document.getElementById("stats").style.display = "none";
+}
 
 document.addEventListener("keydown", (e) => e.key === "q" && handleGameEnd());
 document.addEventListener("contextmenu", (e) => handleAltTileClick(e));
@@ -216,11 +221,12 @@ const getTileIndecies = (e) => {
 };
 
 const updateStats = () => {
-  debugger;
-  const statElements = document.getElementById("stats");
-  statElements.children[0].innerText = `Attempts: ${stats.attempts}`;
-  statElements.children[1].innerText = `Correct: ${stats.correct}`;
-  statElements.children[2].innerText = `Mistakes: ${stats.mistake}`;
+  if (!disableStats) {
+    const statElements = document.getElementById("stats");
+    statElements.children[0].innerText = `Attempts: ${stats.attempts}`;
+    statElements.children[1].innerText = `Correct: ${stats.correct}`;
+    statElements.children[2].innerText = `Mistakes: ${stats.mistake}`;
+  }
 };
 
 const getTipsX = () => {
