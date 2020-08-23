@@ -17,6 +17,12 @@ button:hover {
   background-color: #2f3e46;
   cursor: pointer;
 }
+#stats {
+  /* grid-row: 1; */
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
 #overlay {
   width: 100vw;
   height: 100vh;

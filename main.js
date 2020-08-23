@@ -20,13 +20,17 @@ const disableHelpLines = false;
 const disableTiles = false;
 const disableTips = false;
 
-let tiles = [];
+let stats = {
+  attempts: 0,
+  correct: 0,
+  mistake: 0,
+};
 
+let gameActive = true;
+let tiles = [];
 let tipsY = [];
 let tipsX = [];
-
 let turnCount = 0;
-let mistakes = 0;
 
 canvas.width = size;
 canvas.height = size;
@@ -119,6 +123,8 @@ const refresh = () => {
 
 const handleGameEnd = () => {
   console.log("game end");
+  gameActive = false;
+  debugger;
   document.getElementById("overlay").style.display = "block";
   document.getElementById("overlayText").innerText = mistakes
     ? `You finished with ${mistakes} mistakes`
@@ -127,7 +133,6 @@ const handleGameEnd = () => {
 
 const restartGame = () => {
   console.log("reset game");
-  debugger;
   tiles = [];
   tipsY = [];
   tipsX = [];
@@ -143,25 +148,35 @@ const startGame = () => {
   getTipsX();
   getTipsY();
   renderTips();
+  // gameActive = true;
 };
 
 const handleTileClick = (e) => {
-  const tileIndicies = getTileIndecies(e);
-  const currentTile = tiles[tileIndicies[1]][tileIndicies[0]];
+  if (gameActive) {
+    const tileIndicies = getTileIndecies(e);
+    const currentTile = tiles[tileIndicies[1]][tileIndicies[0]];
 
-  try {
-    if (!currentTile.clicked) {
-      currentTile.clicked = true;
-      if (!currentTile.high) {
-        currentTile.correct = false;
-        mistakes++;
+    try {
+      if (!currentTile.clicked) {
+        stats.attempts++;
+        currentTile.clicked = true;
+        if (!currentTile.high) {
+          currentTile.correct = false;
+          stats.mistake++;
+        } else {
+          stats.correct++;
+        }
+        turnCount++;
+        refresh();
       }
-      turnCount++;
-      refresh();
+    } catch (e) {
+      console.log("You did not click the gameboard");
     }
-  } catch (e) {
-    console.log("You did not click the gameboard");
+  } else {
+    console.log("game not active");
   }
+
+  updateStats();
 };
 
 const handleAltTileClick = (e) => {
@@ -170,18 +185,25 @@ const handleAltTileClick = (e) => {
   const tileIndicies = getTileIndecies(e);
   const currentTile = tiles[tileIndicies[1]][tileIndicies[0]];
 
-  try {
-    if (!currentTile.clicked) {
-      currentTile.clicked = true;
-      if (currentTile.high) {
-        currentTile.correct = false;
-        mistakes++;
+  if (gameActive) {
+    try {
+      if (!currentTile.clicked) {
+        stats.attempts++;
+        currentTile.clicked = true;
+        if (currentTile.high) {
+          currentTile.correct = false;
+          stats.mistake++;
+        } else {
+          stats.correct++;
+        }
+        turnCount++;
+        refresh();
       }
-      turnCount++;
-      refresh();
+    } catch (e) {
+      console.log("You did not click the gameboard");
     }
-  } catch (e) {
-    console.log("You did not click the gameboard");
+
+    updateStats();
   }
 };
 
@@ -191,6 +213,14 @@ const getTileIndecies = (e) => {
   const y = Math.floor((e.clientY - canvas.offsetTop) / tileSize);
 
   return [x, y];
+};
+
+const updateStats = () => {
+  debugger;
+  const statElements = document.getElementById("stats");
+  statElements.children[0].innerText = `Attempts: ${stats.attempts}`;
+  statElements.children[1].innerText = `Correct: ${stats.correct}`;
+  statElements.children[2].innerText = `Mistakes: ${stats.mistake}`;
 };
 
 const getTipsX = () => {
