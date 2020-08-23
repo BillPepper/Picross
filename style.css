@@ -42,8 +42,13 @@ h3 {
 }
 #game {
   display: grid;
-  /* gets set by js */
-  grid-template-columns: auto 600px auto;
+  height: 100vh;
+}
+#game > h1 {
+  grid-column: 3;
+  grid-row: 2;
+  margin: 0;
+  transform: translateY(-50px);
 }
 a {
   color: #84a98c;
@@ -53,7 +58,7 @@ canvas {
   border: 1px solid #52796f;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
   grid-column: 3;
-  grid-row: 1;
+  grid-row: 3;
 }
 ul {
   list-style: none;
@@ -66,14 +71,14 @@ li {
   line-height: 40px;
 }
 #tipsY {
-  grid-row: 1;
+  grid-row: 3;
   grid-column: 4;
   width: 50px;
   padding-left: 10px;
 }
 #tipsX {
   height: 50px;
-  grid-row: 2;
+  grid-row: 4;
   grid-column: 3;
   padding-top: 10px;
 }

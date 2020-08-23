@@ -1,12 +1,12 @@
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
+const game = document.getElementById("game");
 
 const debug = false;
 
 const prim = "#84a98c";
 const sec = "#2f3e46";
 const pass = "#cad2c5";
-// const err = "#523535";
 const err = "#333";
 
 const res = 5;
@@ -30,9 +30,8 @@ let mistakes = 0;
 
 canvas.width = size;
 canvas.height = size;
-document.getElementById(
-  "game"
-).style.gridTemplateColumns = `auto 50px ${size}px 50px auto`;
+game.style.gridTemplateColumns = `auto 50px ${size}px 50px auto`;
+game.style.gridTemplateRows = `auto 50px ${size}px 50px auto`;
 document.getElementById(
   "tipsYList"
 ).style.gridTemplateRows = `repeat(${res}, ${tileSize}px)`;
