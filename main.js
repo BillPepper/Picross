@@ -222,6 +222,12 @@ const getTipsY = () => {
 };
 
 const renderTips = () => {
+  const tipsXList = document.getElementById("tipsXList");
+  const tipsYList = document.getElementById("tipsYList");
+
+  tipsXList.innerHTML = "";
+  tipsYList.innerHTML = "";
+
   if (!disableTips) {
     for (let i = 0; i < tipsY.length; i++) {
       const ty = document.getElementById("tipsY").children[0];
