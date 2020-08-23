@@ -71,6 +71,7 @@ const render = () => {
       }
     }
   }
+  handleGameEnd();
 };
 
 const renderTile = (x, y, size, radius, correct, b, clicked) => {

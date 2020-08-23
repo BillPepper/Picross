@@ -5,6 +5,14 @@ body {
   margin: 0;
   padding: 0;
 }
+button {
+  color: #84a98c;
+  background-color: #111;
+  border: 1px solid #84a98c;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+}
 #overlay {
   width: 100vw;
   height: 100vh;
