@@ -98,3 +98,8 @@ li {
   transform: rotate(90deg);
   padding-bottom: 0;
 }
+.clarification {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}
