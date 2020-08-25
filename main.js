@@ -6,6 +6,7 @@ const debug = false;
 
 const prim = "#84a98c";
 const sec = "#2f3e46";
+const tert = "#f68404";
 const pass = "#cad2c5";
 const err = "#333";
 
@@ -105,7 +106,7 @@ const renderTile = (x, y, size, radius, correct, b, clicked) => {
   if (clicked && !correct) {
     console.log(correct);
     const fourth = size / 4;
-    context.strokeStyle = "#555";
+    context.strokeStyle = tert;
     context.beginPath();
     context.lineWidth = 4;
     context.moveTo(x + fourth, y + fourth);
