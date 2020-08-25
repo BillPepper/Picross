@@ -54,6 +54,10 @@ document
   .addEventListener("click", () => restartGame());
 
 const render = () => {
+  context.fillStyle = err;
+  context.beginPath();
+  context.rect(0, 0, size, size);
+  context.fill();
   if (!disableHelpLines) {
     for (let i = 0; i <= helpLines; i++) {
       const lineHeight = tileSize * 5 * i;
