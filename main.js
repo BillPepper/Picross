@@ -273,19 +273,24 @@ const renderTips = () => {
     for (let i = 0; i < tipsY.length; i++) {
       const ty = document.getElementById("tipsY").children[0];
 
-      const e = document.createElement("li");
-      e.innerText = tipsY[i];
+      const li = document.createElement("li");
+      const span = document.createElement("span");
+      span.innerText = tipsY[i];
+      li.appendChild(span);
 
-      ty.appendChild(e);
+      ty.appendChild(li);
     }
 
     for (let i = 0; i < tipsX.length; i++) {
       const tx = document.getElementById("tipsX").children[0];
 
-      const e = document.createElement("li");
-      e.innerText = tipsX[i];
+      const li = document.createElement("li");
+      const span = document.createElement("span");
+      span.innerText = tipsX[i];
+      span.className = "tipRotate";
+      li.appendChild(span);
 
-      tx.appendChild(e);
+      tx.appendChild(li);
     }
   }
 };
