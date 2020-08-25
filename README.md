@@ -2,7 +2,8 @@
 
 *Still in development!*
 
-A randomly generated Picross-like game. 
+A randomly generated minimal Picross-like game. 
+No dependencies, no weird setup.
 
 ### How to use
 
@@ -16,5 +17,6 @@ A randomly generated Picross-like game.
 - In larger games sometimes there are too few tips which makes the games pretty hard
 - Click and drag does not work
 - Restarting the game after one round breaks click handler
+- Currently all the settings need to be changed in the source
 
 ![alt text](http://flawlesslogic.net/images/pepper_picross.png)
