@@ -19,4 +19,4 @@ No dependencies, no weird setup.
 - Restarting the game after one round breaks click handler
 - Currently all the settings need to be changed in the source
 
-![alt text](http://flawlesslogic.net/images/pepper_picross.png)
+[Play Online](http://picross.flawlesslogic.net/)
