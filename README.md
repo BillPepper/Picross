@@ -16,7 +16,6 @@ No dependencies, no weird setup.
 - Sometimes the tips suggest multiple solutions and only luck decides if you succeed
 - In larger games sometimes there are too few tips which makes the games pretty hard
 - Click and drag does not work
-- Restarting the game after one round breaks click handler
 - Currently all the settings need to be changed in the source
 
 [Play Online](http://picross.flawlesslogic.net/)
