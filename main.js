@@ -3,6 +3,7 @@ const context = canvas.getContext("2d");
 const game = document.getElementById("game");
 
 const debug = false;
+const version = 'v0.0.2'
 
 const prim = "#84a98c";
 const sec = "#2f3e46";
@@ -33,6 +34,8 @@ let tiles = [];
 let tipsY = [];
 let tipsX = [];
 let turnCount = 0;
+
+document.getElementById('versionString').innerText = version;
 
 canvas.width = size;
 canvas.height = size;
