@@ -17,5 +17,6 @@ No dependencies, no weird setup.
 - In larger games sometimes there are too few tips which makes the games pretty hard
 - Click and drag does not work
 - Currently all the settings need to be changed in the source
+- Clicking the 'play again' button clicks tiles below it
 
 [Play Online](http://picross.flawlesslogic.net/)
