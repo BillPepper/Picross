@@ -1,7 +1,3 @@
-const canvas = document.getElementById("canvas");
-const context = canvas.getContext("2d");
-const game = document.getElementById("game");
-
 const debug = false;
 const version = 'v0.0.2'
 
@@ -9,7 +5,7 @@ const prim = "#84a98c";
 const sec = "#2f3e46";
 const tert = "#f68404";
 const pass = "#cad2c5";
-const err = "#333";
+const err = "#333333";
 
 const res = 5;
 const tileSize = 40;
@@ -35,26 +31,31 @@ let tipsY = [];
 let tipsX = [];
 let turnCount = 0;
 
-document.getElementById('versionString').innerText = version;
+// setup elements
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
+const game = document.getElementById("game");
+const versionStrinElem = document.getElementById('versionString').innerText = version;
+const tipsYElem = document.getElementById("tipsYList");
+const statsElem = document.getElementById("stats");
+const restartElem = document.getElementById("stats");
 
+// setup game
 canvas.width = size;
 canvas.height = size;
 game.style.gridTemplateColumns = `auto 50px ${size}px 50px auto`;
 game.style.gridTemplateRows = `auto 50px ${size}px 50px auto`;
-document.getElementById(
-  "tipsYList"
-).style.gridTemplateRows = `repeat(${res}, ${tileSize}px)`;
+tipsYElem.style.gridTemplateRows = `repeat(${res}, ${tileSize}px)`;
 
 if (disableStats) {
-  document.getElementById("stats").style.display = "none";
+    statsElem.style.display = "none";
 }
 
+// setup events
 document.addEventListener("keydown", (e) => e.key === "q" && handleGameEnd());
 document.addEventListener("contextmenu", (e) => handleAltTileClick(e));
 document.addEventListener("click", (e) => handleTileClick(e));
-document
-  .getElementById("restartButton")
-  .addEventListener("click", () => restartGame());
+restartElem.addEventListener("click", () => restartGame());
 
 const render = () => {
   context.fillStyle = err;
