@@ -134,7 +134,6 @@ const refresh = () => {
 const handleGameEnd = () => {
   console.log("game end");
   gameActive = false;
-  debugger;
   document.getElementById("overlay").style.display = "block";
   document.getElementById("overlayText").innerText = mistakes
     ? `You finished with ${mistakes} mistakes`
@@ -143,6 +142,7 @@ const handleGameEnd = () => {
 
 const restartGame = () => {
   console.log("reset game");
+  gameActive = true;
   tiles = [];
   tipsY = [];
   tipsX = [];
