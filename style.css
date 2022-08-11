@@ -99,7 +99,11 @@ li {
   padding-bottom: 0;
 }
 .clarification {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
+  font-weight: lighter;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
 }
